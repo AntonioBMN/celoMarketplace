@@ -93,37 +93,7 @@ document
         notification(`🎉 You successfully added "${params[0]}".`)
         getProducts()
     })
-
-function productTemplate(_product) {
-    return `
-          <div class="card mb-4">
-            <img class="card-img-top" src="${_product.image}" alt="...">
-            <div class="position-absolute top-0 end-0 bg-warning mt-4 px-2 py-1 rounded-start">
-              ${_product.sold} Sold
-            </div>
-            <div class="card-body text-left p-4 position-relative">
-              <div class="translate-middle-y position-absolute top-0">
-              ${identiconTemplate(_product.owner)}
-              </div>
-              <h2 class="card-title fs-4 fw-bold mt-2">${_product.name}</h2>
-              <p class="card-text mb-4" style="min-height: 82px">
-                ${_product.description}             
-              </p>
-              <p class="card-text mt-4">
-                <i class="bi bi-geo-alt-fill"></i>
-                <span>${_product.location}</span>
-              </p>
-              <div class="d-grid gap-2">
-                <a class="btn btn-lg btn-outline-dark buyBtn fs-6 p-3" id=${_product.index
-        }>
-                  Buy for ${_product.price.shiftedBy(-ERC20_DECIMALS).toFixed(2)} cUSD
-                </a>
-              </div>
-            </div>
-          </div>
-        `
-}
-
+    
 function renderProducts() {
     document.getElementById("marketplace").innerHTML = ""
     products.forEach((_product) => {
@@ -196,8 +166,7 @@ window.addEventListener('load', async () => {
     await getBalance()
     await getProducts()
     notificationOff()
-});
-
+})
 document
     .querySelector("#newProductBtn")
     .addEventListener("click", () => {
@@ -227,14 +196,14 @@ document.querySelector("#marketplace").addEventListener("click", async (e) => {
         }
         notification(`⌛ Awaiting payment for "${products[index].name}"...`)
         try {
-          const result = await contract.methods
-            .buyProduct(index)
-            .send({ from: kit.defaultAccount })
-          notification(`🎉 You successfully bought "${products[index].name}".`)
-          getProducts()
-          getBalance()
+            const result = await contract.methods
+                .buyProduct(index)
+                .send({ from: kit.defaultAccount })
+            notification(`🎉 You successfully bought "${products[index].name}".`)
+            getProducts()
+            getBalance()
         } catch (error) {
-          notification(`⚠️ ${error}.`)
+            notification(`⚠️ ${error}.`)
         }
-      }
-    })
+    }
+})
