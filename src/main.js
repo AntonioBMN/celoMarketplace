@@ -93,7 +93,11 @@ document
         notification(`🎉 You successfully added "${params[0]}".`)
         getProducts()
     })
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> 0732aaf7c49438be8ff3c4694550380f782a5e11
 function renderProducts() {
     document.getElementById("marketplace").innerHTML = ""
     products.forEach((_product) => {
@@ -205,5 +209,10 @@ document.querySelector("#marketplace").addEventListener("click", async (e) => {
         } catch (error) {
             notification(`⚠️ ${error}.`)
         }
+<<<<<<< HEAD
     }
 })
+=======
+      }
+    })
+>>>>>>> 0732aaf7c49438be8ff3c4694550380f782a5e11
